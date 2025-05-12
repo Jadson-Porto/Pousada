@@ -33,4 +33,3 @@ def tratar_reserva(df):
         "Data_fim_data", "Nro_quarto_data_fim", "Data", "Id_cliente"
     ])
     return df
-

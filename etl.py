@@ -22,18 +22,30 @@ try:
     conn = criar_conexao()
     cursor = conn.cursor()
 
+    # Deletar dados existentes de todas as tabelas
+    cursor.execute("DELETE FROM Reserva")
+    cursor.execute("DELETE FROM Data")
+    cursor.execute("DELETE FROM Status")
+    cursor.execute("DELETE FROM Quarto")
+    cursor.execute("DELETE FROM Cliente")
+    conn.commit()
+
     # Inserções
     for _, row in cliente.iterrows():
-        cursor.execute("""
-            INSERT INTO Cliente (Id, Nome, Telefone, Cpf)
-            VALUES (?, ?, ?, ?)
-        """, int(row['Id']), row['Nome'], row['Telefone'], row['Cpf'])
+        cursor.execute("SELECT COUNT(*) FROM Cliente WHERE Id = ?", int(row['Id']))
+        if cursor.fetchone()[0] == 0:  # Se o registro não existir
+            cursor.execute("""
+                INSERT INTO Cliente (Id, Nome, Telefone, Cpf)
+                VALUES (?, ?, ?, ?)
+            """, int(row['Id']), row['Nome'], row['Telefone'], row['Cpf'])
 
     for _, row in quarto.iterrows():
-        cursor.execute("""
-            INSERT INTO Quarto (Nro, Preco, Descricao)
-            VALUES (?, ?, ?)
-        """, int(row['Nro']), float(row['Preco']), row['Descricao'])
+        cursor.execute("SELECT COUNT(*) FROM Quarto WHERE Nro = ?", int(row['Nro']))
+        if cursor.fetchone()[0] == 0:  # Se o registro não existir
+            cursor.execute("""
+                INSERT INTO Quarto (Nro, Preco, Descricao)
+                VALUES (?, ?, ?)
+            """, int(row['Nro']), float(row['Preco']), row['Descricao'])
 
     for _, row in status.iterrows():
         cursor.execute("""

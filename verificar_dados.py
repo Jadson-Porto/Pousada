@@ -3,8 +3,8 @@ import pandas as pd
 
 conn = pyodbc.connect(
     r"Driver={SQL Server};"
-    r"Server=DESKTOP-VJ7IRJH\SQLEXPRESS;"
-    r"Database=ETL_VITOR;"
+    r"Server=localhost;"
+    r"Database=HotelDB;"
     r"Trusted_Connection=yes;"
 )
 

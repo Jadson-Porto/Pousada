@@ -4,8 +4,8 @@ def criar_conexao():
     try:
         conn = pyodbc.connect(
             r"Driver={SQL Server};"
-            r"Server=DESKTOP-VJ7IRJH;"  # Use exatamente o nome que aparece no SSMS
-            r"Database=ETL_VITOR;"
+            r"Server=TREINOPYTHON;"
+            r"Database=HotelDB;"
             r"Trusted_Connection=yes;"
         )
         print("Conexão estabelecida com sucesso.")
@@ -13,3 +13,4 @@ def criar_conexao():
     except Exception as e:
         print(f"Erro na conexão com SQL Server: {e}")
         return None
+    
