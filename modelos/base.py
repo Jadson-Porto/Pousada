@@ -3,9 +3,9 @@ from typing import List, Type
 import pandas as pd
 from sqlalchemy.ext.declarative import declarative_base
 
+Base = declarative_base()
 
 class Base:
-    Base = declarative_base()
 
     @classmethod
     def from_dataframe(cls: Type["Base"], df: pd.DataFrame) -> List["Base"]:
